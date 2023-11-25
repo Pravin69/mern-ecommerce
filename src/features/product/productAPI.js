@@ -8,8 +8,6 @@ export function fetchAllProducts() {
 }
 
 export function fetchProductsByFilters(filter) {
-  console.log(filter);
-
   // filter = {"category": "smartphone"}
   let queryString = "";
   for (let key in filter) {
