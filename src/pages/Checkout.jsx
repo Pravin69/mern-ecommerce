@@ -292,7 +292,7 @@ function Checkout() {
                               {address.name}
                             </p>
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                              {address.street}
+                              {address.streetAddress}
                             </p>
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                               {address.pincode}
