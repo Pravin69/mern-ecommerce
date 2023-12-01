@@ -61,11 +61,16 @@ export default function UserProfile() {
           <h3 className="text-xl my-5 font-bold tracking-tight text-red-900">
             Email address : {user.email}
           </h3>
+          {user.role === "admin" && (
+            <h3 className="text-xl my-5 font-bold tracking-tight text-red-900">
+              role : {user.role}
+            </h3>
+          )}
         </div>
 
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <button
-            onClick={(e) => {
+            onClick={() => {
               setShowAddAddressForm(true);
               setSelectedEditIndex(-1);
             }}
@@ -257,7 +262,7 @@ export default function UserProfile() {
 
                 <div className="mt-6 flex items-center justify-end gap-x-6">
                   <button
-                    onClick={(e) => setShowAddAddressForm(false)}
+                    onClick={() => setShowAddAddressForm(false)}
                     type="submit"
                     className="rounded-md cursor-pointer px-3 py-2 text-sm font-semibold text-grey shadow-sm hover:bg-grey-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
@@ -470,7 +475,7 @@ export default function UserProfile() {
 
                     <div className="mt-6 flex items-center justify-end gap-x-6">
                       <button
-                        onClick={(e) => setSelectedEditIndex(-1)}
+                        onClick={() => setSelectedEditIndex(-1)}
                         type="submit"
                         className="rounded-md cursor-pointer px-3 py-2 text-sm font-semibold text-grey shadow-sm hover:bg-grey-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
@@ -510,7 +515,7 @@ export default function UserProfile() {
                 </div>
                 <div className="hidden sm:flex sm:flex-col sm:items-end">
                   <button
-                    onClick={(e) => handleEditForm(index)}
+                    onClick={() => handleEditForm(index)}
                     type="button"
                     className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500"
                   >

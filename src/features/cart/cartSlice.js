@@ -61,11 +61,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -106,14 +102,12 @@ export const cartSlice = createSlice({
       .addCase(resetCartAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(resetCartAsync.fulfilled, (state, action) => {
+      .addCase(resetCartAsync.fulfilled, (state) => {
         state.status = "idle";
         state.items = [];
       });
   },
 });
-
-export const { increment } = cartSlice.actions;
 
 export const selectItems = (state) => state.cart.items;
 
