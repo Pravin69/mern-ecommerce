@@ -2,20 +2,26 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteItemFromCartAsync,
+  selectCartStatus,
   selectItems,
   updateCartAsync,
 } from "./cartSlice";
 
 import { Link, Navigate } from "react-router-dom";
+import { discountPrice } from "../../app/constants";
+import Loader from "../common/Loader";
+import Modal from "../common/Modal";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+
   const items = useSelector(selectItems);
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountPrice(item) * item.quantity + amount,
     0
   );
+  const status = useSelector(selectCartStatus);
 
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
@@ -26,6 +32,8 @@ export default function Cart() {
   const handleRemove = (e, id) => {
     dispatch(deleteItemFromCartAsync(id));
   };
+
+  if (status === "loading") return <Loader />;
 
   return (
     <>
@@ -53,7 +61,7 @@ export default function Cart() {
                           <h3>
                             <a href={item.href}>{item.title}</a>
                           </h3>
-                          <p className="ml-4">${item.price}</p>
+                          <p className="ml-4">${discountPrice(item)}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
                           {item.brand}
@@ -81,8 +89,17 @@ export default function Cart() {
                         </div>
 
                         <div className="flex">
+                          <Modal
+                            title={`Delete ${item.title}`}
+                            message="Are you sure want to delete this Cart item ?"
+                            dangerOptions="Delete"
+                            cancelOption="Cancel"
+                            dangerAction={(e) => handleRemove(e, item.id)}
+                            cancelAction={() => setOpenModal(false)}
+                            showModal={openModal === item.id}
+                          />
                           <button
-                            onClick={(e) => handleRemove(e, item.id)}
+                            onClick={(e) => setOpenModal(item.id)}
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
@@ -124,7 +141,6 @@ export default function Cart() {
                   <button
                     type="button"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
-                    onClick={() => setOpen(false)}
                   >
                     Continue Shopping
                     <span aria-hidden="true"> &rarr;</span>
