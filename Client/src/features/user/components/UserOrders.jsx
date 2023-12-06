@@ -91,22 +91,22 @@ export default function UserOrders() {
                     <div className="flex gap-x-4">
                       <div className="min-w-0 flex-auto">
                         <p className="text-sm font-semibold leading-6 text-gray-900">
-                          {order.selectedAddress[0].name}
+                          {order.selectedAddress.name}
                         </p>
                         <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                          {order.selectedAddress[0].streetAddress}
+                          {order.selectedAddress.streetAddress}
                         </p>
                         <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                          {order.selectedAddress[0].pinCode}
+                          {order.selectedAddress.pinCode}
                         </p>
                       </div>
                     </div>
                     <div className="hidden sm:flex sm:flex-col sm:items-end">
                       <p className="text-sm leading-6 text-gray-900">
-                        Phone: {order.selectedAddress[0].phone}
+                        Phone: {order.selectedAddress.phone}
                       </p>
                       <p className="text-sm leading-6 text-gray-500">
-                        {order.selectedAddress[0].city}
+                        {order.selectedAddress.city}
                       </p>
                     </div>
                   </div>

@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Modal from "../../common/Modal";
+import { toast } from "react-toastify";
 
 function ProductForm() {
   const {
@@ -83,11 +84,13 @@ function ProductForm() {
             product.id = params.id;
             product.rating = selectedProduct.rating || 0;
             dispatch(updateProductAsync(product));
+            toast.success("Product Updated");
             reset();
           } else {
             dispatch(createProductAsync(product));
+            toast.success("Product Created");
+            // TODO: these alerts should check if API failed
             reset();
-            //TODO:  on product successfully added clear fields and show a message
           }
         })}
       >
@@ -97,7 +100,7 @@ function ProductForm() {
               Add Product
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              {selectedProduct.deleted && (
+              {selectedProduct && selectedProduct.deleted && (
                 <h2 className="text-red-500 sm: col-span-6">
                   This product is deleted
                 </h2>
@@ -440,15 +443,17 @@ function ProductForm() {
           </button>
         </div>
       </form>
-      <Modal
-        title={`Delete ${selectedProduct.title}`}
-        message="Are you sure want to delete this Product ?"
-        dangerOptions="Delete"
-        cancelOption="Cancel"
-        dangerAction={handleDelete}
-        cancelAction={() => setOpenModal(false)}
-        showModal={openModal}
-      />
+      {selectedProduct && (
+        <Modal
+          title={`Delete ${selectedProduct.title}`}
+          message="Are you sure want to delete this Product ?"
+          dangerOptions="Delete"
+          cancelOption="Cancel"
+          dangerAction={handleDelete}
+          cancelAction={() => setOpenModal(false)}
+          showModal={openModal}
+        />
+      )}
     </>
   );
 }
