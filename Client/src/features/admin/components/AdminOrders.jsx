@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import { useEffect, useState } from "react";
 import { ITEMS_PER_PAGE, discountPrice } from "../../../app/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -116,7 +115,10 @@ function AdminOrders() {
               </thead>
               <tbody className="text-gray-600 text-sm font-light">
                 {orders.map((order) => (
-                  <tr className="border-b border-gray-200 hover:bg-gray-100">
+                  <tr
+                    key={order.id}
+                    className="border-b border-gray-200 hover:bg-gray-100"
+                  >
                     <td className="py-3 px-6 text-left whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="mr-2"></div>
@@ -124,8 +126,8 @@ function AdminOrders() {
                       </div>
                     </td>
                     <td className="py-3 px-6 text-left">
-                      {order.items.map((item) => (
-                        <div className="flex py-2 items-center">
+                      {order.items.map((item, index) => (
+                        <div key={index} className="flex py-2 items-center">
                           <div className="mr-2">
                             <img
                               className="w-6 h-6 rounded-full"
