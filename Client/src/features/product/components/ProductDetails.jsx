@@ -8,7 +8,7 @@ import {
   selectProductListStatus,
 } from "../productSlice";
 import { useParams } from "react-router-dom";
-import { selectLoggedInUser } from "../../auth/authSlice";
+
 import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import { discountPrice } from "../../../app/constants";
 import { toast } from "react-toastify";
@@ -49,7 +49,6 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   // TODO: In server data we will add colors, sizes , highlights.
 
-  const user = useSelector(selectLoggedInUser);
   const items = useSelector(selectItems);
   const product = useSelector(selectProductById);
   const dispatch = useDispatch();
@@ -64,7 +63,6 @@ export default function ProductDetail() {
         ...product,
         product: product.id,
         quantity: 1,
-        user: user.id,
       };
       dispatch(addToCartAsync(newItem));
       // TODO: it will be based on server response of backend

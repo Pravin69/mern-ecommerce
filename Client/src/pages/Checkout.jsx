@@ -25,7 +25,7 @@ function Checkout() {
     formState: { errors },
   } = useForm();
 
-  const user = useSelector(selectUserInfo);
+  const userInfo = useSelector(selectUserInfo);
   const currentOrder = useSelector(selectCurrentOrder);
 
   const items = useSelector(selectItems);
@@ -48,7 +48,7 @@ function Checkout() {
 
   const handleAddress = (e) => {
     console.log(e.target.value);
-    setSelectedAddress(user.addresses[e.target.value]);
+    setSelectedAddress(userInfo.addresses[e.target.value]);
   };
 
   const handlePayment = (e) => {
@@ -60,7 +60,7 @@ function Checkout() {
       items,
       totalAmount,
       totalItems,
-      user: user.id,
+      user: userInfo.id,
       paymentMethod,
       selectedAddress,
       status: "pending", // other status can be delivered, recieved.
@@ -74,11 +74,15 @@ function Checkout() {
   return (
     <>
       {!items.length && <Navigate to="/" replace={true}></Navigate>}
-      {currentOrder && (
+      {currentOrder && currentOrder.paymentMethod === "cash" && (
         <Navigate
           to={`/order-success/${currentOrder.id}`}
           replace={true}
         ></Navigate>
+      )}
+
+      {currentOrder && currentOrder.paymentMethod === "card" && (
+        <Navigate to={`/stripe-checkout/`} replace={true}></Navigate>
       )}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
@@ -90,8 +94,8 @@ function Checkout() {
                 console.log(data);
                 dispatch(
                   updateUserAsync({
-                    ...user,
-                    addresses: [...user.addresses, data],
+                    ...userInfo,
+                    addresses: [...userInfo.addresses, data],
                   })
                 );
 
@@ -273,7 +277,7 @@ function Checkout() {
                   </p>
 
                   <ul role="list">
-                    {user.addresses.map((address, index) => (
+                    {userInfo.addresses.map((address, index) => (
                       <li
                         key={index}
                         className="flex justify-between gap-x-6 px-5 py-5 "

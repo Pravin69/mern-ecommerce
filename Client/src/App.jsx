@@ -10,7 +10,11 @@ import SignupPage from "./pages/SignupPage";
 LoginPage;
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useEffect } from "react";
-import { selectLoggedInUser } from "./features/auth/authSlice";
+import {
+  checkAuthAsync,
+  selectLoggedInUser,
+  selectUserChecked,
+} from "./features/auth/authSlice";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
@@ -26,6 +30,7 @@ import AdminProductFormPage from "./pages/AdminProductFormPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import StripeCheckout from "./pages/StripeCheckout";
 
 const router = createBrowserRouter([
   {
@@ -133,6 +138,14 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/stripe-checkout/",
+    element: (
+      <Protected>
+        <StripeCheckout />
+      </Protected>
+    ),
+  },
+  {
     path: "/logout",
     element: <Logout />,
   },
@@ -149,35 +162,43 @@ const router = createBrowserRouter([
 function App() {
   const user = useSelector(selectLoggedInUser);
   const dispatch = useDispatch();
+  const userChecked = useSelector(selectUserChecked);
+
+  useEffect(() => {
+    dispatch(checkAuthAsync());
+  }, [dispatch]);
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchItemsByUserIdAsync(user.id));
-      dispatch(fetchLoggedInUserAsync(user.id));
+      dispatch(fetchItemsByUserIdAsync());
+      // We can get req.user by token on backend so no need to give in Front-End
+      dispatch(fetchLoggedInUserAsync());
     }
   }, [dispatch, user]);
 
   return (
-    <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <div className="App">
-        {/* <Home></Home> */}
-        {/* <LoginPage></LoginPage> */}
-        {/* <SignupPage /> */}
-        <RouterProvider router={router} />
-      </div>
-    </>
+    <div className="App">
+      {userChecked && (
+        <>
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          {/* <Home></Home> */}
+          {/* <LoginPage></LoginPage> */}
+          {/* <SignupPage /> */}
+          <RouterProvider router={router} />
+        </>
+      )}
+    </div>
   );
 }
 
