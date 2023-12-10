@@ -23,6 +23,8 @@ const changeOrderStatusColor = (status) => {
       return "bg-yellow-200 text-yellow-600";
     case "delivered":
       return "bg-green-200 text-green-600";
+    case 'received':
+      return 'bg-green-200 text-green-600';
     case "cancelled":
       return "bg-red-200 text-red-600";
     default:
@@ -42,8 +44,14 @@ function AdminOrders() {
     setEditableOrderId(order.id);
   };
 
-  const handleUpdate = (e, order) => {
+  const handleOrderStatus = (e, order) => {
     const updatedOrder = { ...order, status: e.target.value };
+    dispatch(updateOrderAsync(updatedOrder));
+    setEditableOrderId(-1);
+  };
+
+  const handleOrderPaymentStatus = (e, order) => {
+    const updatedOrder = { ...order, paymentStatus: e.target.value };
     dispatch(updateOrderAsync(updatedOrder));
     setEditableOrderId(-1);
   };
@@ -70,7 +78,7 @@ function AdminOrders() {
       <div className=" bg-gray-100 flex items-center justify-center  font-sans overflow-hidden">
         <div className="w-full ">
           <div className="bg-white shadow-md rounded my-6">
-            <table className="min-w-max w-full table-auto">
+            <table className="w-full table-auto">
               <thead>
                 <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                   <th
@@ -109,7 +117,9 @@ function AdminOrders() {
                       ))}
                   </th>
                   <th className="py-3 px-6 text-center">Shipping Address</th>
-                  <th className="py-3 px-6 text-center">Status</th>
+                  <th className="py-3 px-6 text-center">Order Status</th>
+                  <th className="py-3 px-6 text-center">Payment Method</th>
+                  <th className="py-3 px-6 text-center">Payment Status</th>
                   <th className="py-3 px-6 text-center">Actions</th>
                 </tr>
               </thead>
@@ -187,7 +197,7 @@ function AdminOrders() {
                           className="font-medium py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                           name=""
                           id=""
-                          onChange={(e) => handleUpdate(e, order)}
+                          onChange={(e) => handleOrderStatus(e, order)}
                         >
                           <option value="pending">Pending</option>
                           <option value="dispatched">Dispatched</option>
@@ -201,6 +211,31 @@ function AdminOrders() {
                           )} font-medium  py-1 px-3 rounded-full text-xs`}
                         >
                           {order.status}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-3 px-6 text-center">
+                      <div className="flex font-medium items-center justify-center">
+                        {order.paymentMethod}
+                      </div>
+                    </td>
+
+                    <td className="py-3 px-6 text-center">
+                      {order.id === editableOrderId ? (
+                        <select
+                        className="font-medium py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                          onChange={(e) => handleOrderPaymentStatus(e, order)}
+                        >
+                          <option value="pending">Pending</option>
+                          <option value="received">Received</option>
+                        </select>
+                      ) : (
+                        <span
+                          className={`${changeOrderStatusColor(
+                            order.paymentStatus
+                          )} font-medium py-1 px-3 rounded-full text-xs`}
+                        >
+                          {order.paymentStatus}
                         </span>
                       )}
                     </td>
