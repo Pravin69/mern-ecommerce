@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   deleteItemFromCartAsync,
   selectCartLoaded,
-  selectCartStatus,
   selectItems,
   updateCartAsync,
 } from "./cartSlice";
 
 import { Link, Navigate } from "react-router-dom";
 import { discountPrice } from "../../app/constants";
-import Loader from "../common/Loader";
+
 import Modal from "../common/Modal";
 
 export default function Cart() {
@@ -25,7 +24,6 @@ export default function Cart() {
 
   console.log(items);
 
-  const status = useSelector(selectCartStatus);
   const cartLoaded = useSelector(selectCartLoaded);
 
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
@@ -39,7 +37,6 @@ export default function Cart() {
   const handleRemove = (e, id) => {
     dispatch(deleteItemFromCartAsync(id));
   };
-  if (status === "loading") return <Loader />;
 
   return (
     <>
