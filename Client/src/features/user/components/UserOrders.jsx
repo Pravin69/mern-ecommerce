@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../common/Loader";
 import {
   fetchLoggedInUserOrdersAsync,
   selectUserInfoStatus,
   selectUserOrders,
 } from "../userSlice";
-import Loader from "../../common/Loader";
 
 export default function UserOrders() {
   const dispatch = useDispatch();

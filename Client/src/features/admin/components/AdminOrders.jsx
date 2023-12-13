@@ -1,19 +1,19 @@
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  EyeIcon,
+  PencilIcon,
+} from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
-import { ITEMS_PER_PAGE } from "../../../app/constants";
 import { useDispatch, useSelector } from "react-redux";
+import { ITEMS_PER_PAGE } from "../../../app/constants";
+import Pagination from "../../common/Pagination";
 import {
   fetchAllOrdersAsync,
   selectOrders,
   selectTotalOrders,
   updateOrderAsync,
 } from "../../order/orderSlice";
-import {
-  PencilIcon,
-  EyeIcon,
-  ArrowUpIcon,
-  ArrowDownIcon,
-} from "@heroicons/react/24/outline";
-import Pagination from "../../common/Pagination";
 
 const changeOrderStatusColor = (status) => {
   switch (status) {

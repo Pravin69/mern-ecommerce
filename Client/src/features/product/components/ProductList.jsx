@@ -1,5 +1,16 @@
+import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  ChevronDownIcon,
+  FunnelIcon,
+  MinusIcon,
+  PlusIcon,
+  Squares2X2Icon,
+  StarIcon,
+} from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   fetchBrandsAsync,
   fetchCategoriesAsync,
@@ -10,21 +21,10 @@ import {
   selectProductListStatus,
   selectTotalItems,
 } from "../productSlice";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
 
 import { ITEMS_PER_PAGE } from "../../../app/constants";
-import Pagination from "../../common/Pagination";
 import Loader from "../../common/Loader";
+import Pagination from "../../common/Pagination";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },

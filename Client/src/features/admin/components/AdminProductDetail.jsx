@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import {
   fetchProductByIdAsync,
   selectProductById,
   selectProductListStatus,
 } from "../../product/productSlice";
-import { useParams } from "react-router-dom";
-import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 // import { selectLoggedInUser } from "../../auth/authSlice";
-import Loader from "../../common/Loader";
 import { toast } from "react-toastify";
+import Loader from "../../common/Loader";
 
 // TODO: In server data we will add colors, sizes , highlights. to each product
 

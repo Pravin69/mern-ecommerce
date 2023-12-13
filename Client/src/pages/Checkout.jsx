@@ -1,21 +1,20 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   deleteItemFromCartAsync,
   selectItems,
   updateCartAsync,
 } from "../features/cart/cartSlice";
-import { useForm } from "react-hook-form";
-import { updateUserAsync } from "../features/user/userSlice";
+import Loader from "../features/common/Loader";
 import {
   createOrderAsync,
   selectCurrentOrder,
   selectStatus,
 } from "../features/order/orderSlice";
-import { selectUserInfo } from "../features/user/userSlice";
-import Loader from "../features/common/Loader";
-import { toast } from "react-toastify";
+import { selectUserInfo, updateUserAsync } from "../features/user/userSlice";
 
 function Checkout() {
   const dispatch = useDispatch();
