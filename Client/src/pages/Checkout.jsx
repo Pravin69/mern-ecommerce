@@ -11,13 +11,15 @@ import { updateUserAsync } from "../features/user/userSlice";
 import {
   createOrderAsync,
   selectCurrentOrder,
+  selectStatus,
 } from "../features/order/orderSlice";
 import { selectUserInfo } from "../features/user/userSlice";
-import { discountPrice } from "../app/constants";
+import Loader from "../features/common/Loader";
+import { toast } from "react-toastify";
 
 function Checkout() {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -27,10 +29,11 @@ function Checkout() {
 
   const userInfo = useSelector(selectUserInfo);
   const currentOrder = useSelector(selectCurrentOrder);
+  const status = useSelector(selectStatus);
 
   const items = useSelector(selectItems);
   const totalAmount = items.reduce(
-    (amount, item) => discountPrice(item.product) * item.quantity + amount,
+    (amount, item) => item.product.discountPrice * item.quantity + amount,
     0
   );
 
@@ -56,20 +59,26 @@ function Checkout() {
   };
 
   const handleOrder = () => {
-    const order = {
-      items,
-      totalAmount,
-      totalItems,
-      user: userInfo.id,
-      paymentMethod,
-      selectedAddress,
-      status: "pending", // other status can be delivered, recieved.
-    };
-    dispatch(createOrderAsync(order));
+    if (selectedAddress && paymentMethod) {
+      const order = {
+        items,
+        totalAmount,
+        totalItems,
+        user: userInfo.id,
+        paymentMethod,
+        selectedAddress,
+        status: "pending", // other status can be delivered, recieved.
+      };
+      dispatch(createOrderAsync(order));
+    } else {
+      toast.warn("Enter Address and Payment method");
+    }
     //TODO : Redirect to order-success page
     //TODO : clear cart after order
     //TODO : on server change the stock number of items
   };
+
+  if (status === "loading") return <Loader />;
 
   return (
     <>
@@ -145,7 +154,7 @@ function Checkout() {
                           {...register("email", {
                             required: "email is required",
                             pattern: {
-                              value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                              value: /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/gi,
                               message: "email is not valid",
                             },
                           })}
@@ -391,7 +400,7 @@ function Checkout() {
                                 </a>
                               </h3>
                               <p className="ml-4">
-                                ${discountPrice(item.product)}
+                                ${item.product.discountPrice}
                               </p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
@@ -462,7 +471,6 @@ function Checkout() {
                       <button
                         type="button"
                         className="font-medium text-indigo-600 hover:text-indigo-500"
-                        onClick={() => setOpen(false)}
                       >
                         Continue Shopping
                         <span aria-hidden="true"> &rarr;</span>

@@ -10,7 +10,6 @@ import {
 import { useParams } from "react-router-dom";
 
 import { addToCartAsync, selectItems } from "../../cart/cartSlice";
-import { discountPrice } from "../../../app/constants";
 import { toast } from "react-toastify";
 import Loader from "../../common/Loader";
 
@@ -74,7 +73,6 @@ export default function ProductDetail() {
 
       dispatch(addToCartAsync(newItem));
       // TODO: it will be based on server response of backend
-      toast.success("Item added to Cart");
     } else {
       toast.info("Item already added");
     }
@@ -179,7 +177,7 @@ export default function ProductDetail() {
                 {product.price}
               </p>
               <p className="text-3xl tracking-tight text-gray-900">
-                {discountPrice(product)}
+                {product.discountPrice}
               </p>
 
               {/* Reviews */}

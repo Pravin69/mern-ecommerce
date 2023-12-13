@@ -20,13 +20,23 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import { ITEMS_PER_PAGE, discountPrice } from "../../../app/constants";
+import { ITEMS_PER_PAGE } from "../../../app/constants";
 import Pagination from "../../common/Pagination";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
-  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
-  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
+  {
+    name: "Price: Low to High",
+    sort: "discountPrice",
+    order: "asc",
+    current: false,
+  },
+  {
+    name: "Price: High to Low",
+    sort: "discountPrice",
+    order: "desc",
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -433,7 +443,7 @@ function ProductGrid({ products }) {
                     </div>
                     <div>
                       <p className="text-sm block font-medium text-gray-900">
-                        ${discountPrice(product)}
+                        ${product.discountPrice}
                       </p>
                       <p className="text-sm block line-through font-medium text-gray-400">
                         ${product.price}

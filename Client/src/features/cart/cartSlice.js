@@ -7,6 +7,8 @@ import {
   resetCart,
 } from "./cartAPI";
 
+import { toast } from "react-toastify";
+
 const initialState = {
   items: [],
   status: "idle",
@@ -17,6 +19,8 @@ export const addToCartAsync = createAsyncThunk(
   "cart/addToCart",
   async (item) => {
     const response = await addToCart(item);
+    toast.success("Item Added to Cart");
+
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }

@@ -5,7 +5,6 @@ import {
   selectUserInfoStatus,
   selectUserOrders,
 } from "../userSlice";
-import { discountPrice } from "../../../app/constants";
 import Loader from "../../common/Loader";
 
 export default function UserOrders() {
@@ -55,7 +54,7 @@ export default function UserOrders() {
                                   </a>
                                 </h3>
                                 <p className="ml-4">
-                                  ${discountPrice(item.product)}
+                                  ${item.product.discountPrice}
                                 </p>
                               </div>
                               <p className="mt-1 text-sm text-gray-500">

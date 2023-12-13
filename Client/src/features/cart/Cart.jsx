@@ -8,7 +8,6 @@ import {
 } from "./cartSlice";
 
 import { Link, Navigate } from "react-router-dom";
-import { discountPrice } from "../../app/constants";
 
 import Modal from "../common/Modal";
 
@@ -18,7 +17,7 @@ export default function Cart() {
 
   const items = useSelector(selectItems);
   const totalAmount = items.reduce(
-    (amount, item) => discountPrice(item.product) * item.quantity + amount,
+    (amount, item) => item.product.discountPrice * item.quantity + amount,
     0
   );
 
@@ -66,7 +65,7 @@ export default function Cart() {
                           <h3>
                             <a href={item.product.id}>{item.product.title}</a>
                           </h3>
-                          <p className="ml-4">${discountPrice(item.product)}</p>
+                          <p className="ml-4">${item.product.discountPrice}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
                           {item.product.brand}
@@ -104,7 +103,7 @@ export default function Cart() {
                             showModal={openModal === item.id}
                           />
                           <button
-                            onClick={(e) => setOpenModal(item.id)}
+                            onClick={() => setOpenModal(item.id)}
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >

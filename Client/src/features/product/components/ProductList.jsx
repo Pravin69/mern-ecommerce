@@ -22,14 +22,24 @@ import {
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 
-import { ITEMS_PER_PAGE, discountPrice } from "../../../app/constants";
+import { ITEMS_PER_PAGE } from "../../../app/constants";
 import Pagination from "../../common/Pagination";
 import Loader from "../../common/Loader";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
-  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
-  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
+  {
+    name: "Price: Low to High",
+    sort: "discountPrice",
+    order: "asc",
+    current: false,
+  },
+  {
+    name: "Price: High to Low",
+    sort: "discountPrice",
+    order: "desc",
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -444,7 +454,7 @@ function ProductGrid({ products, status }) {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">
-                        ${discountPrice(product)}
+                        ${product.discountPrice}
                       </p>
                       <p className="text-sm font-medium line-through text-gray-400">
                         ${product.price}
