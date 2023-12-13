@@ -53,10 +53,20 @@ export function loginUser(loginInfo) {
   });
 }
 
-export function signOut(userId) {
-  return new Promise(async (resolve) => {
-    // TODO: on server it will remove user session info
-    resolve({ data: "success" });
+export function signOut() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch("/auth/logout");
+
+      if (response.ok) {
+        resolve({ data: "User logout successful" });
+      } else {
+        const error = await response.text();
+        reject(error);
+      }
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 

@@ -23,8 +23,8 @@ const changeOrderStatusColor = (status) => {
       return "bg-yellow-200 text-yellow-600";
     case "delivered":
       return "bg-green-200 text-green-600";
-    case 'received':
-      return 'bg-green-200 text-green-600';
+    case "received":
+      return "bg-green-200 text-green-600";
     case "cancelled":
       return "bg-red-200 text-red-600";
     default:
@@ -75,14 +75,14 @@ function AdminOrders() {
 
   return (
     <div className="overflow-x-auto">
-      <div className=" bg-gray-100 flex items-center justify-center  font-sans overflow-hidden">
+      <div className=" bg-gray-100 flex items-center justify-center  font-sans">
         <div className="w-full ">
           <div className="bg-white shadow-md rounded my-6">
             <table className="w-full table-auto">
               <thead>
                 <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                   <th
-                    className="py-3 px-6 text-left cursor-pointer"
+                    className="py-3 px-0 text-left cursor-pointer"
                     onClick={(e) =>
                       handleSort({
                         sort: "id",
@@ -98,10 +98,10 @@ function AdminOrders() {
                         <ArrowDownIcon className="w-4 h-4 inline"></ArrowDownIcon>
                       ))}
                   </th>
-                  <th className="py-3 px-6 text-left">Items</th>
+                  <th className="py-3 px-0 text-left">Items</th>
                   <th
                     className="py-3 px-6 text-left cursor-pointer"
-                    onClick={(e) =>
+                    onClick={() =>
                       handleSort({
                         sort: "totalAmount",
                         order: sort?._order === "asc" ? "desc" : "asc",
@@ -116,11 +116,45 @@ function AdminOrders() {
                         <ArrowDownIcon className="w-4 h-4 inline"></ArrowDownIcon>
                       ))}
                   </th>
-                  <th className="py-3 px-6 text-center">Shipping Address</th>
-                  <th className="py-3 px-6 text-center">Order Status</th>
-                  <th className="py-3 px-6 text-center">Payment Method</th>
-                  <th className="py-3 px-6 text-center">Payment Status</th>
-                  <th className="py-3 px-6 text-center">Actions</th>
+                  <th className="py-3 px-0 text-center">Shipping Address</th>
+                  <th className="py-3 px-0 text-center">Order Status</th>
+                  <th className="py-3 px-0 text-center">Payment Method</th>
+                  <th className="py-3 px-0 text-center">Payment Status</th>
+                  <th
+                    className="py-3 px-0 text-center"
+                    onClick={() =>
+                      handleSort({
+                        sort: "createdAt",
+                        order: sort?._order === "asc" ? "desc" : "asc",
+                      })
+                    }
+                  >
+                    Order Time{" "}
+                    {sort._sort === "createdAt" &&
+                      (sort._order === "asc" ? (
+                        <ArrowUpIcon className="w-4 h-4 inline"></ArrowUpIcon>
+                      ) : (
+                        <ArrowDownIcon className="w-4 h-4 inline"></ArrowDownIcon>
+                      ))}
+                  </th>
+                  <th
+                    className="py-3 px-0 text-center"
+                    onClick={(e) => {
+                      handleSort({
+                        sort: "updatedAt",
+                        order: sort?._order === "asc" ? "desc" : "asc",
+                      });
+                    }}
+                  >
+                    Last Updated{" "}
+                    {sort._sort === "updatedAt" &&
+                      (sort._order === "asc" ? (
+                        <ArrowUpIcon className="w-4 h-4 inline" />
+                      ) : (
+                        <ArrowDownIcon className="w-4 h-4 inline" />
+                      ))}
+                  </th>
+                  <th className="py-3 px-0 text-center">Actions</th>
                 </tr>
               </thead>
               <tbody className="text-gray-600 text-sm font-light">
@@ -129,13 +163,13 @@ function AdminOrders() {
                     key={order.id}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="py-3 px-6 text-left whitespace-nowrap">
+                    <td className="py-3 px-0 text-left whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="mr-2"></div>
                         <span className="font-medium">{order.id}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-6 text-left">
+                    <td className="py-3 px-0 text-left">
                       {order.items.map((item, index) => (
                         <div key={index} className="flex py-2 items-center">
                           <div className="mr-2">
@@ -152,12 +186,12 @@ function AdminOrders() {
                         </div>
                       ))}
                     </td>
-                    <td className="py-3 px-6 text-center">
+                    <td className="py-3 px-0 text-center">
                       <div className="flex font-medium  items-center justify-center">
                         ${order.totalAmount}
                       </div>
                     </td>
-                    <td className="py-3 px-6 flex  md:justify-end justify-end">
+                    <td className="py-3 px-0 flex  md:justify-end justify-end">
                       <div className="flex items-center md:w-44 w-48 flex-wrap">
                         <div>
                           <span className="font-medium">
@@ -191,7 +225,7 @@ function AdminOrders() {
                         </div>
                       </div>
                     </td>
-                    <td className="py-3 px-6 text-center">
+                    <td className="py-3 px-0 text-center">
                       {order.id === editableOrderId ? (
                         <select
                           className="font-medium py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
@@ -214,16 +248,16 @@ function AdminOrders() {
                         </span>
                       )}
                     </td>
-                    <td className="py-3 px-6 text-center">
+                    <td className="py-3 px-0 text-center">
                       <div className="flex font-medium items-center justify-center">
                         {order.paymentMethod}
                       </div>
                     </td>
 
-                    <td className="py-3 px-6 text-center">
+                    <td className="py-3 px-0 text-center">
                       {order.id === editableOrderId ? (
                         <select
-                        className="font-medium py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                          className="font-medium py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                           onChange={(e) => handleOrderPaymentStatus(e, order)}
                         >
                           <option value="pending">Pending</option>
@@ -239,17 +273,34 @@ function AdminOrders() {
                         </span>
                       )}
                     </td>
-                    <td className="py-3 px-6 text-center">
+
+                    <td className="py-3 px-0 text-center">
+                      <div className="flex items-center justify-center">
+                        {order.createdAt
+                          ? new Date(order.createdAt).toLocaleString()
+                          : null}
+                      </div>
+                    </td>
+
+                    <td className="py-3 px-0 text-center">
+                      <div className="flex items-center justify-center">
+                        {order.updatedAt
+                          ? new Date(order.updatedAt).toLocaleString()
+                          : null}
+                      </div>
+                    </td>
+
+                    <td className="py-3 px-0 text-center">
                       <div className="flex item-center justify-center">
                         <div className="w-6 cursor-pointer mr-2 transform hover:text-purple-500 hover:scale-110">
                           <EyeIcon
-                            onClick={(e) => handleShow(order)}
+                            onClick={() => handleShow(order)}
                             className="w-8 h-4"
                           />
                         </div>
                         <div className="w-6 cursor-pointer mr-2 transform hover:text-purple-500 hover:scale-110">
                           <PencilIcon
-                            onClick={(e) => handleEdit(order)}
+                            onClick={() => handleEdit(order)}
                             className="w-8 h-4"
                           />
                         </div>

@@ -29,6 +29,38 @@ function ProductForm() {
   const params = useParams();
   const selectedProduct = useSelector(selectProductById);
 
+  const colors = [
+    {
+      name: "White",
+      class: "bg-white",
+      selectedClass: "ring-gray-400",
+      id: "white",
+    },
+    {
+      name: "Gray",
+      class: "bg-gray-200",
+      selectedClass: "ring-gray-400",
+      id: "gray",
+    },
+    {
+      name: "Black",
+      class: "bg-gray-900",
+      selectedClass: "ring-gray-900",
+      id: "black",
+    },
+  ];
+
+  const sizes = [
+    { name: "XXS", inStock: true, id: "xxs" },
+    { name: "XS", inStock: true, id: "xs" },
+    { name: "S", inStock: true, id: "s" },
+    { name: "M", inStock: true, id: "m" },
+    { name: "L", inStock: true, id: "l" },
+    { name: "XL", inStock: true, id: "xl" },
+    { name: "2XL", inStock: true, id: "2xl" },
+    { name: "3XL", inStock: true, id: "3xl" },
+  ];
+
   useEffect(() => {
     if (params.id) {
       dispatch(fetchProductByIdAsync(params.id));
@@ -50,6 +82,18 @@ function ProductForm() {
       setValue("image3", selectedProduct.images[2]);
       setValue("brand", selectedProduct.brand);
       setValue("category", selectedProduct.category);
+      setValue("highlight1", selectedProduct.highlights[0]);
+      setValue("highlight2", selectedProduct.highlights[1]);
+      setValue("highlight3", selectedProduct.highlights[2]);
+      setValue("highlight4", selectedProduct.highlights[3]);
+      setValue(
+        "sizes",
+        selectedProduct.sizes.map((size) => size.id)
+      );
+      setValue(
+        "colors",
+        selectedProduct.colors.map((color) => color.id)
+      );
     }
   }, [selectedProduct, params.id, setValue]);
 
@@ -72,7 +116,19 @@ function ProductForm() {
             product.image3,
             product.thumbnail,
           ];
+          product.highlights = [
+            product.highlight1,
+            product.highlight2,
+            product.highlight3,
+            product.highlight4,
+          ];
           product.rating = 0;
+          product.colors = product.colors.map((color) =>
+            colors.find((clr) => clr.id === color)
+          );
+          product.sizes = product.sizes.map((size) =>
+            sizes.find((sz) => sz.id === size)
+          );
           delete product["image1"];
           delete product["image2"];
           delete product["image3"];
@@ -167,6 +223,48 @@ function ProductForm() {
                       </option>
                     ))}
                   </select>
+                </div>
+              </div>
+              <div className="col-span-full">
+                <label
+                  htmlFor="colors"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Colors
+                </label>
+                <div className="mt-2">
+                  {colors.map((color) => (
+                    <>
+                      <input
+                        type="checkbox"
+                        {...register("colors", {})}
+                        key={color.id}
+                        value={color.id}
+                      />{" "}
+                      {color.name}
+                    </>
+                  ))}
+                </div>
+              </div>
+              <div className="col-span-full">
+                <label
+                  htmlFor="sizes"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Sizes
+                </label>
+                <div className="mt-2">
+                  {sizes.map((size) => (
+                    <>
+                      <input
+                        type="checkbox"
+                        {...register("sizes", {})}
+                        key={size.id}
+                        value={size.id}
+                      />{" "}
+                      {size.name}
+                    </>
+                  ))}
                 </div>
               </div>
               <div className="col-span-full">
@@ -338,6 +436,83 @@ function ProductForm() {
               </div>
             </div>
           </div>
+
+          <div className="sm:col-span-6">
+            <label
+              htmlFor="highlight1"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Highlight 1
+            </label>
+            <div className="mt-2">
+              <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
+                <input
+                  type="text"
+                  {...register("highlight1", {})}
+                  id="highlight1"
+                  className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="sm:col-span-6">
+            <label
+              htmlFor="highlight2"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Highlight 2
+            </label>
+            <div className="mt-2">
+              <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
+                <input
+                  type="text"
+                  {...register("highlight2", {})}
+                  id="highlight2"
+                  className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="sm:col-span-6">
+            <label
+              htmlFor="highlight3"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Highlight 3
+            </label>
+            <div className="mt-2">
+              <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
+                <input
+                  type="text"
+                  {...register("highlight3", {})}
+                  id="highlight3"
+                  className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="sm:col-span-6">
+            <label
+              htmlFor="highlight4"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Highlight 4
+            </label>
+            <div className="mt-2">
+              <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
+                <input
+                  type="text"
+                  {...register("highlight4", {})}
+                  id="highlight4"
+                  className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Extra{" "}
