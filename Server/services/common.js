@@ -169,7 +169,7 @@ exports.invoiceTemplate = function (order) {
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
               <a href="https://mern-ecommerce-gold.vercel.app" target="_blank" style="display: inline-block;">
-                <img src="./img/paste-logo-light@2x.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+                <img src="" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
               </a>
             </td>
           </tr>
@@ -220,7 +220,7 @@ exports.invoiceTemplate = function (order) {
           <!-- start copy -->
           <tr>
             <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-              <p style="margin: 0;">Here is a summary of your recent order. If you have any questions or concerns about your order, please <a href="coderdost@gmail.com">contact us</a>.</p>
+              <p style="margin: 0;">Here is a summary of your recent order. If you have any questions or concerns about your order, please <a href="p.thakur.144.ram@gmail.com">contact us</a>.</p>
             </td>
           </tr>
           <!-- end copy -->
@@ -299,7 +299,7 @@ exports.invoiceTemplate = function (order) {
                     <td align="left" valign="top" style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                       <p><strong>Delivery Address</strong></p>
                       <p>${order.selectedAddress.name}<br>${
-    order.selectedAddress.street
+    order.selectedAddress.streetAddress
   }<br>${order.selectedAddress.city},${order.selectedAddress.state},${
     order.selectedAddress.pinCode
   }</p>
