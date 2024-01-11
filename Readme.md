@@ -4,8 +4,7 @@
 <h4 align="center">Welcome to Apna Shop, a full-stack e-commerce web application built from scratch using the MERN Stack (ReactJS, NodeJS, ExpressJS, MongoDB). Apna Shop is designed to provide users with a seamless and feature-rich online shopping experience.</h4>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/%E2%9D%A4-Made%20with%20Love-blue
-"  alt="Gitter">
+    <img src="https://img.shields.io/badge/%E2%9D%A4-Made%20with%20Love-blue" alt="Gitter">
 </p>
 
 <p align="center">
