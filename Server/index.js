@@ -207,5 +207,5 @@ async function main() {
 }
 
 server.listen(process.env.PORT, () => {
-  console.log("Server listening on port 8000");
+  console.log("Server is listening on port 8000");
 });
