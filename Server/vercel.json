@@ -9,6 +9,14 @@
       "use": "@vercel/static"
     }
   ],
-
-  "rewrites": [{ "source": "/(.*)", "destination": "index.js" }]
+  "routes": [
+    {
+      "src": "/dist/(.*)",
+      "dest": "/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
+    }
+  ]
 }
