@@ -4,7 +4,8 @@
 <h4 align="center">Welcome to Apna Shop, a full-stack e-commerce web application built from scratch using the MERN Stack (ReactJS, NodeJS, ExpressJS, MongoDB). Apna Shop is designed to provide users with a seamless and feature-rich online shopping experience.</h4>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/%E2%9D%A4-Made%20with%20Love-blue"  alt="Gitter">
+    <img src="https://img.shields.io/badge/%E2%9D%A4-Made%20with%20Love-blue
+"  alt="Gitter">
 </p>
 
 <p align="center">
@@ -17,7 +18,7 @@
 <img src="https://github.com/Pravin69/mern-ecommerce/blob/main/Server/demo/app_ss.jpeg?raw=true" alt="Apna Shop Capture" style="max-width: 100% !important">
 </p>
 
-## Key Features ✨
+## Key Features
 
 - **User Authentication** :-
 
@@ -66,7 +67,7 @@
 - **Admin Portal** :-
   - Admins can log in to edit or add products and view/update order statuses, ensuring efficient business operations.
 
-## How To Use ❓
+## How To Use
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line :
 
@@ -105,4 +106,4 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 ## You may also like... 🙂
 
 - [Share-and-Fun](https://github.com/Pravin69/Share-and-Fun-Web-app) - A social media web-app
-- [Movie-remix](https://github.com/Pravin69/movie-remix) - A movie recommender app
+- [Movie-remix](https://github.com/Pravin69/movie-remix) - A movie recommendor app
