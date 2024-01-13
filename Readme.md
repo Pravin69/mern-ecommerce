@@ -98,9 +98,6 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 # Start client in another terminal while server is running.
   cd client/
   npm run dev
-
-# Run the app
-  npm start
 ```
 
 ## App Demo
