@@ -311,7 +311,7 @@ function Checkout() {
                   </p>
 
                   <ul role="list">
-                    {userInfo.addresses.map((address, index) => (
+                    {userInfo?.addresses?.map((address, index) => (
                       <li
                         key={index}
                         className="flex justify-between gap-x-6 px-5 py-5 "
@@ -332,7 +332,7 @@ function Checkout() {
                               {address.streetAddress}
                             </p>
                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                              {address.pincode}
+                              {address.pinCode}
                             </p>
                           </div>
                         </div>
