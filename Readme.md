@@ -10,6 +10,7 @@
 <p align="center">
   • <a href="#key-features">Key Features</a> 
   • <a href="#how-to-use">How To Use</a> 
+   • <a href="#app-demo">App demo</a> 
   • <a href="https://mern-ecommerce-gold.vercel.app">Live Demo</a> 
   </p>
 
@@ -101,6 +102,12 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 # Run the app
   npm start
 ```
+
+## App Demo
+
+<p align="center">
+<img src="https://github.com/Pravin69/mern-ecommerce/blob/main/Server/demo/Demo.gif?raw=true" alt="Apna Shop Capture" style="max-width: 100% !important">
+</p>
 
 ## You may also like... 🙂
 
